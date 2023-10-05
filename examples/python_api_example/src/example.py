@@ -17,15 +17,18 @@ def main():
 	dbVersion = args.database_version
 
 	print("SourcetrailDB Python API Example")
-	print("Supported database version: " + str(srctrl.getSupportedDatabaseVersion()))
+	print(
+		f"Supported database version: {str(srctrl.getSupportedDatabaseVersion())}"
+	)
 
 	if dbVersion > 0 and dbVersion != srctrl.getSupportedDatabaseVersion():
-		print("ERROR: Only supports database version: " + str(srctrl.getSupportedDatabaseVersion()) +
-			". Requested version: " + str(dbVersion))
+		print(
+			f"ERROR: Only supports database version: {str(srctrl.getSupportedDatabaseVersion())}. Requested version: {str(dbVersion)}"
+		)
 		return 1
 
 	if not srctrl.open(databaseFilePath):
-		print("ERROR: " + srctrl.getLastError())
+		print(f"ERROR: {srctrl.getLastError()}")
 		return 1
 
 	print("Clearing loaded database now...")
@@ -38,7 +41,7 @@ def main():
 	srctrl.recordFileLanguage(fileId, "python")
 
 	if len(srctrl.getLastError()) > 0:
-		print("ERROR: " + srctrl.getLastError())
+		print(f"ERROR: {srctrl.getLastError()}")
 		return 1
 
 	symbolId = srctrl.recordSymbol(
@@ -75,11 +78,11 @@ def main():
 	srctrl.commitTransaction()
 
 	if len(srctrl.getLastError()) > 0:
-		print("ERROR: " + srctrl.getLastError())
+		print(f"ERROR: {srctrl.getLastError()}")
 		return 1
 
 	if not srctrl.close():
-		print("ERROR: " + srctrl.getLastError())
+		print(f"ERROR: {srctrl.getLastError()}")
 		return 1
 
 	print("done")
